@@ -57,6 +57,7 @@ class Main: PluginBase(), Listener {
                     sender.sendMessage("pos2 set")
                 }
                 if (args?.get(0) == "save") {
+                    sender.sendMessage("save")
                     if (pos1[sender] == null) return false
                     if (pos2[sender] == null) return false
                     if (args[1].none()) return false
@@ -97,7 +98,9 @@ class Main: PluginBase(), Listener {
                                 val location = Location(x.toDouble(), y.toDouble(), z.toDouble(), sender.level)
                                 val block = sender.level.getBlock(location)
                                 val jsonObject = JsonObject()
-                                jsonObject.addProperty("block_id", BlockState.of(block.id).stateId.replaceAfter(";","").replace(";",""))
+                                var blockS = BlockState.of(block.id).stateId.replaceAfter(";","").replace(";","")
+                                if (blockS == "minecraft:air" && save_air) continue
+                                jsonObject.addProperty("block_id", blockS)
                                 jsonObject.addProperty("block_data", block.dataStorage)
                                 jsonObject.add("position", JsonObject().apply {
                                     addProperty("x", location.floorX)
@@ -116,15 +119,19 @@ class Main: PluginBase(), Listener {
                     sender.sendMessage("saved!")
                 }
                 if (args?.get(0) == "load") {
+                    sender.sendMessage("load")
                     if (args[1].none()) return false
                     val blockDataFile = File(jsonWorldDir, "${args[1]}.json")
                     if (!blockDataFile.exists()) {
                         sender.sendMessage("file not found")
                         return false
                     }
+                    var save_air = false
+                    if (args[2].none()) save_air = false else if (args[2] == "true") save_air = true
                     val json_world: JsonObject = Gson().fromJson(blockDataFile.readText(), JsonObject::class.java)
                     for (jsonObject in json_world.get("json_world").asJsonArray) {
                         val block_id = jsonObject.asJsonObject.get("block_id").asString
+                        if (block_id == "minecraft:air" && save_air) continue
                         val block_data = jsonObject.asJsonObject.get("block_data").asInt
                         val position = jsonObject.asJsonObject.get("position").asJsonObject
                         val x = position.get("x").asInt
