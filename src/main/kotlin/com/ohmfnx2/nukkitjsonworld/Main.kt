@@ -18,7 +18,7 @@ import com.google.gson.JsonObject
 import java.io.File
 
 class Main: PluginBase(), Listener {
-    private var jsonWorldDir: File = File(dataFolder,"json_world")
+    private var jsonWorldDir: File = File(dataFolder,"plugins/Nukkit_Json_World/json_world")
 
     private var pos1: HashMap<Player, Location> = HashMap()
 
