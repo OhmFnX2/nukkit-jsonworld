@@ -16,7 +16,7 @@ How To Use:
 -- list : List json_world
 
   
--json_world File: plugins/bdsx-json_world/world
+-json_world File: plugins/Nukkit_Json_World/json_world
 
 support:
 
