@@ -1,0 +1,16 @@
+name: Nukkit Json World
+version: 1.0.0
+main: com.ohmfnx2.nukkitjsonworld.Main
+api: 1.0.13
+
+commands:
+  jsonworld:
+    description: Json World is Convert normal World to Json World
+    aliases: ["jw"]
+    permission: mjbw2jwplugin.jsonworld
+    permission-message: You do not have permission to use this command.
+
+permissions:
+  mjbw2jwplugin.jsonworld:
+    description: Allows jsonworld command
+    default: op
