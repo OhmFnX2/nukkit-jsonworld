@@ -1,6 +1,6 @@
 # nukkit-jsonworld
 
-BDSx Json World: https://github.com/OhmFnX2/bdsx-jsonworld
+BDSx Json World: [https://github.com/OhmFnX2/bdsx-jsonworld](https://github.com/OhmFnX2/bdsx-json_world)
 
 How To Use:
 
